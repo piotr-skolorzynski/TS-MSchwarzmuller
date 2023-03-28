@@ -7,3 +7,10 @@ userInput = 'Max';
 if (typeof userInput === 'string') {
   userName = userInput;
 }
+
+function generateError(message: string, code: number): never {
+  throw { message, errorCode: code };
+  //   while (true) {} another example of never
+}
+
+generateError('An error occured!', 500);
