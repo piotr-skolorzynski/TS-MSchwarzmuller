@@ -17,10 +17,30 @@ class Department {
   }
 }
 
-const accounting = new Department('d1', 'Accounting');
+class ITDepartment extends Department {
+  //   admins: string[] = []; // można dłuższą wersję wtedy w parametrze admin nie ma public
+  constructor(id: string, public admins: string[]) {
+    super(id, 'IT'); //wołanie konstruktora z dziedziczonej klasy
+    // this.admins = admins; //inicjalizacja admins zawsze po super dla wersji dłuższej
+  }
+}
 
-accounting.addEmployee('Max');
-accounting.addEmployee('Skolo');
+const it = new ITDepartment('it1', ['Krzychu', 'Stefan']);
 
-accounting.describe(); //wywołanie metody na obiekcie
-accounting.printEmployeeInformation();
+class AccountingDepartment extends Department {
+  constructor(id: string, private reports: string[]) {
+    super(id, 'Accounting');
+  }
+
+  addReport(text: string) {
+    this.reports.push(text);
+  }
+
+  printReports() {
+    console.log(this.reports);
+  }
+}
+
+const accounting = new AccountingDepartment('d2', []);
+accounting.addReport('Something went wrong ...');
+accounting.printReports();
