@@ -1,5 +1,5 @@
 class Department {
-  private employees: string[] = [];
+  protected employees: string[] = [];
 
   constructor(private readonly id: string, public name: string) {}
 
@@ -17,19 +17,17 @@ class Department {
   }
 }
 
-class ITDepartment extends Department {
-  //   admins: string[] = []; // można dłuższą wersję wtedy w parametrze admin nie ma public
-  constructor(id: string, public admins: string[]) {
-    super(id, 'IT'); //wołanie konstruktora z dziedziczonej klasy
-    // this.admins = admins; //inicjalizacja admins zawsze po super dla wersji dłuższej
-  }
-}
-
-const it = new ITDepartment('it1', ['Krzychu', 'Stefan']);
-
 class AccountingDepartment extends Department {
   constructor(id: string, private reports: string[]) {
     super(id, 'Accounting');
+  }
+
+  addEmployee(name: string) {
+    if (name === 'Max') {
+      return;
+    }
+
+    this.employees.push(name);
   }
 
   addReport(text: string) {
@@ -44,3 +42,16 @@ class AccountingDepartment extends Department {
 const accounting = new AccountingDepartment('d2', []);
 accounting.addReport('Something went wrong ...');
 accounting.printReports();
+accounting.addEmployee('Max');
+accounting.addEmployee('Wiesiek');
+accounting.printEmployeeInformation();
+
+class ITDepartment extends Department {
+  //   admins: string[] = []; // można dłuższą wersję wtedy w parametrze admin nie ma public
+  constructor(id: string, public admins: string[]) {
+    super(id, 'IT'); //wołanie konstruktora z dziedziczonej klasy
+    // this.admins = admins; //inicjalizacja admins zawsze po super dla wersji dłuższej
+  }
+}
+
+const it = new ITDepartment('it1', ['Krzychu', 'Stefan']);
