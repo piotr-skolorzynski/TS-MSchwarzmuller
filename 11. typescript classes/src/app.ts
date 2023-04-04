@@ -1,13 +1,10 @@
 class Department {
-  name: string;
-  private employees: string[] = []; //pozwala na dostęp do tej wartości tylko poprzez metodę w klasie
+  private employees: string[] = [];
 
-  constructor(n: string) {
-    this.name = n;
-  }
+  constructor(private id: string, public name: string) {}
 
   describe() {
-    console.log('Department: ' + this.name);
+    console.log(`Department (${this.id}): ${this.name}`);
   }
 
   addEmployee(employee: string) {
@@ -20,7 +17,7 @@ class Department {
   }
 }
 
-const accounting = new Department('Accounting');
+const accounting = new Department('d1', 'Accounting');
 
 accounting.addEmployee('Max');
 accounting.addEmployee('Skolo');
