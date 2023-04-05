@@ -1,4 +1,4 @@
-class Department {
+abstract class Department {
   static fiscalYear = 2023;
   protected employees: string[] = [];
 
@@ -8,9 +8,7 @@ class Department {
     return { name };
   }
 
-  describe() {
-    console.log(`Department (${this.id}): ${this.name}`);
-  }
+  abstract describe(): void;
 
   addEmployee(employee: string) {
     this.employees.push(employee);
@@ -49,6 +47,10 @@ class AccountingDepartment extends Department {
     this.lastReport = reports[0];
   }
 
+  describe(): void {
+    console.log('accounting department');
+  }
+
   addEmployee(name: string) {
     if (name === 'Max') {
       return;
@@ -81,6 +83,9 @@ class ITDepartment extends Department {
   constructor(id: string, public admins: string[]) {
     super(id, 'IT'); //wołanie konstruktora z dziedziczonej klasy
     // this.admins = admins; //inicjalizacja admins zawsze po super dla wersji dłuższej
+  }
+  describe(): void {
+    console.log('IT department');
   }
 }
 
