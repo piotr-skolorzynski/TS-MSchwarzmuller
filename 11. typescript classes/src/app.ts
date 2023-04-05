@@ -18,8 +18,27 @@ class Department {
 }
 
 class AccountingDepartment extends Department {
+  private lastReport: string;
+
+  get mostRecentReport() {
+    if (this.lastReport) {
+      return this.lastReport;
+    }
+
+    throw new Error('No report found.');
+  }
+
+  set mostRecentReport(value: string) {
+    if (!value) {
+      throw new Error('Please pass a valid value');
+    }
+
+    this.addReport(value);
+  }
+
   constructor(id: string, private reports: string[]) {
     super(id, 'Accounting');
+    this.lastReport = reports[0];
   }
 
   addEmployee(name: string) {
@@ -32,6 +51,7 @@ class AccountingDepartment extends Department {
 
   addReport(text: string) {
     this.reports.push(text);
+    this.lastReport = text;
   }
 
   printReports() {
@@ -45,6 +65,8 @@ accounting.printReports();
 accounting.addEmployee('Max');
 accounting.addEmployee('Wiesiek');
 accounting.printEmployeeInformation();
+accounting.mostRecentReport = 'Year End Report';
+console.log(accounting.mostRecentReport);
 
 class ITDepartment extends Department {
   //   admins: string[] = []; // można dłuższą wersję wtedy w parametrze admin nie ma public
