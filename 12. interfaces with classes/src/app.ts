@@ -6,10 +6,6 @@ let add: AddFn;
 
 add = (n1: number, n2: number) => n1 + n2;
 
-interface Named {
-  readonly name: string;
-}
-
 interface AnotherInterface {
   age: number;
 }
@@ -17,22 +13,34 @@ interface AnotherInterface {
 interface Greetable extends Named, AnotherInterface {
   greet(phrase: string): void;
 }
+interface Named {
+  readonly name?: string;
+  outputName?: string;
+}
 
-class Person implements Greetable {
-  name: string;
+class Person implements Named {
+  name?: string;
   age: number = 30;
 
-  constructor(n: string) {
-    this.name = n;
+  constructor(n?: string) {
+    if (n) {
+      this.name = n;
+    }
   }
 
   greet(phrase: string): void {
-    console.log(phrase + ' ' + this.name);
+    if (this.name) {
+      console.log(phrase + ' ' + this.name);
+
+      return;
+    }
+
+    console.log('Hi');
   }
 }
 
-let user1: Greetable;
+let user1: Person;
 
-user1 = new Person('Max');
+user1 = new Person();
 
 user1.greet('Hi there - I am');
