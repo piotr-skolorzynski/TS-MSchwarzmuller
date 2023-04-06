@@ -1,14 +1,16 @@
-interface Greetable {
-  name: string;
-
-  greet(phrase: string): void;
+interface Named {
+  readonly name: string;
 }
 
 interface AnotherInterface {
   age: number;
 }
 
-class Person implements Greetable, AnotherInterface {
+interface Greetable extends Named, AnotherInterface {
+  greet(phrase: string): void;
+}
+
+class Person implements Greetable {
   name: string;
   age: number = 30;
 
@@ -21,6 +23,8 @@ class Person implements Greetable, AnotherInterface {
   }
 }
 
-const user1 = new Person('Max');
+let user1: Greetable;
+
+user1 = new Person('Max');
 
 user1.greet('Hi there - I am');
