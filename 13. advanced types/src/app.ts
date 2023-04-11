@@ -113,3 +113,14 @@ const userInputElement = document.querySelector(
 ) as HTMLInputElement;
 
 userInputElement.value = 'Hi there!';
+
+interface ErrorContainer {
+  id: string; // można dodać inne propsy niż ten poniżej ale musi być tego samego typu
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  id: crypto.randomUUID(),
+  email: 'Not a valid email!',
+  userName: 'Must start with a capital letter',
+};
