@@ -143,3 +143,12 @@ console.log(fetchedUserData?.job?.title);
 
 //jest to odpowienik z JS
 console.log(fetchedUserData.job && fetchedUserData.job.title);
+
+// tutaj hardcodujemy null więc TS wie że to napewno null ale jeśli
+// dane ściągamy to już nie
+
+const userInput = null;
+//poniższe rozwiązanie działa dla falsy values
+// const storedData = userInput || 'DEFAULT';
+//to tylko dla undefined oraz null
+const storedData = userInput ?? 'DEFAULT';
