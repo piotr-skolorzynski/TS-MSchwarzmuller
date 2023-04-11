@@ -129,3 +129,17 @@ const errorBag: ErrorContainer = {
   email: 'Not a valid email!',
   userName: 'Must start with a capital letter',
 };
+
+const fetchedUserData = {
+  id: 'u1',
+  name: 'Max',
+  // job: {
+  //   title: 'CEO',
+  //   description: 'My own company',
+  // },
+};
+
+console.log(fetchedUserData?.job?.title);
+
+//jest to odpowienik z JS
+console.log(fetchedUserData.job && fetchedUserData.job.title);
