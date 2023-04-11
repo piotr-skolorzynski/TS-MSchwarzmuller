@@ -103,3 +103,13 @@ function moveAnimal(animal: Animal) {
 }
 
 moveAnimal({ type: 'bird', flyingSpeed: 55 });
+
+// const userInputElement = <HTMLInputElement>(
+//   document.getElementById('user-input')
+// );
+
+const userInputElement = document.querySelector(
+  'user-input'
+) as HTMLInputElement;
+
+userInputElement.value = 'Hi there!';
