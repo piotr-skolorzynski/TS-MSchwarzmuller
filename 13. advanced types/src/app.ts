@@ -130,19 +130,19 @@ const errorBag: ErrorContainer = {
   userName: 'Must start with a capital letter',
 };
 
-const fetchedUserData = {
-  id: 'u1',
-  name: 'Max',
-  // job: {
-  //   title: 'CEO',
-  //   description: 'My own company',
-  // },
-};
+// const fetchedUserData = {
+//   id: 'u1',
+//   name: 'Max',
+//   // job: {
+//   //   title: 'CEO',
+//   //   description: 'My own company',
+//   // },
+// };
 
-console.log(fetchedUserData?.job?.title);
+// console.log(fetchedUserData?.job?.title);
 
-//jest to odpowienik z JS
-console.log(fetchedUserData.job && fetchedUserData.job.title);
+// //jest to odpowienik z JS
+// console.log(fetchedUserData.job && fetchedUserData.job.title);
 
 // tutaj hardcodujemy null więc TS wie że to napewno null ale jeśli
 // dane ściągamy to już nie
