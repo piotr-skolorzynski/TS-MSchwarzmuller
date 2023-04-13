@@ -91,3 +91,31 @@ class Product {
     return this._price * (1 + tax);
   }
 }
+
+function Autobind(_: any, _2: string, descritptor: PropertyDescriptor) {
+  const originalMethod = descritptor.value;
+  const adjustedDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    get() {
+      const boundFunction = originalMethod.bind(this); //this będzie wskazywało na originalMethod
+      return boundFunction;
+    },
+  };
+
+  return adjustedDescriptor;
+}
+
+class Printer {
+  message = 'This Works!';
+
+  @Autobind
+  showMessage() {
+    console.log(this.message);
+  }
+}
+
+const p = new Printer();
+
+const button = document.querySelector('button')!;
+button.addEventListener('click', p.showMessage);
