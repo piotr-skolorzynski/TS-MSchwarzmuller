@@ -1,3 +1,18 @@
+// autobind decprator
+function Autobind(_: any, _2: string, descriptior: PropertyDescriptor) {
+  const originalMethod = descriptior.value;
+  const adjDescriptor: PropertyDescriptor = {
+    configurable: true,
+    get() {
+      const boundFn = originalMethod.bind(this);
+      return boundFn;
+    },
+  };
+
+  return adjDescriptor;
+}
+
+// Project input class
 class ProjectInput {
   templateElement: HTMLTemplateElement;
   hostElement: HTMLDivElement;
@@ -34,6 +49,7 @@ class ProjectInput {
     this.attach();
   }
 
+  @Autobind
   private submitHandler(event: Event) {
     event.preventDefault();
     console.log(this.titleInputElement.value);
