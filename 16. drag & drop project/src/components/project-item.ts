@@ -1,53 +1,50 @@
-/// <reference path="base-component.ts" />
-/// <reference path="../decorators/autobind.ts" />
-/// <reference path="../models/project.ts" />
-/// <reference path="../models/drag-drop.ts" />
+import { Autobind } from '../decorators/autobind';
+import { Dragable } from '../models/drag-drop';
+import { Project } from '../models/project';
+import { Component } from './base-component';
 
-namespace App {
-  //Project Item class
-  export class ProjectItem
-    extends Component<HTMLUListElement, HTMLLinkElement>
-    implements Dragable
-  {
-    private project: Project;
+//Project Item class
+export class ProjectItem
+  extends Component<HTMLUListElement, HTMLLinkElement>
+  implements Dragable
+{
+  private project: Project;
 
-    get persons() {
-      if (this.project.people === 1) {
-        return '1 person';
-      }
-
-      return `${this.project.people} persons`;
+  get persons() {
+    if (this.project.people === 1) {
+      return '1 person';
     }
 
-    constructor(hostId: string, project: Project) {
-      super('single-project', hostId, false, project.id);
-      this.project = project;
+    return `${this.project.people} persons`;
+  }
 
-      this.configure();
-      this.renderContent();
-    }
+  constructor(hostId: string, project: Project) {
+    super('single-project', hostId, false, project.id);
+    this.project = project;
 
-    @Autobind
-    dragStartHandler(event: DragEvent): void {
-      event.dataTransfer?.setData('text/plain', this.project.id);
-      event.dataTransfer!.effectAllowed = 'move';
-    }
+    this.configure();
+    this.renderContent();
+  }
 
-    @Autobind
-    dragEndHandler(_: DragEvent): void {
-      console.log('dragend');
-    }
+  @Autobind
+  dragStartHandler(event: DragEvent): void {
+    event.dataTransfer?.setData('text/plain', this.project.id);
+    event.dataTransfer!.effectAllowed = 'move';
+  }
 
-    configure(): void {
-      this.element.addEventListener('dragstart', this.dragStartHandler);
-      this.element.addEventListener('dragend', this.dragEndHandler);
-    }
+  @Autobind
+  dragEndHandler(_: DragEvent): void {
+    console.log('dragend');
+  }
 
-    renderContent(): void {
-      this.element.querySelector('h2')!.textContent = this.project.title;
-      this.element.querySelector('h3')!.textContent =
-        this.persons + ' assigned';
-      this.element.querySelector('p')!.textContent = this.project.description;
-    }
+  configure(): void {
+    this.element.addEventListener('dragstart', this.dragStartHandler);
+    this.element.addEventListener('dragend', this.dragEndHandler);
+  }
+
+  renderContent(): void {
+    this.element.querySelector('h2')!.textContent = this.project.title;
+    this.element.querySelector('h3')!.textContent = this.persons + ' assigned';
+    this.element.querySelector('p')!.textContent = this.project.description;
   }
 }
